@@ -2,7 +2,8 @@
 
 use Authorize\Presenter\Role as RolePresenter,
 	Orchestra\Messages,
-	Orchestra\Model\Role;
+	Orchestra\Model\Role,
+	Orchestra\View;
 
 class Authorize_Roles_Controller extends Authorize\Controller {
 
@@ -37,6 +38,38 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 		View::share('_title_', __('authorize::title.roles.list'));
 
 		return View::make('authorize::roles.index', $data);
+	}
+
+	/**
+	 * Show edit a role
+	 *
+	 * GET (orchestra)/resources/authorize.roles/view/(:id)
+	 *
+	 * @access public
+	 * @param  int      $id
+	 * @return Response
+	 */
+	public function get_view($id = null)
+	{
+		$type = 'update';
+		$page = Role::find($id);
+
+		if (is_null($page))
+		{
+			$type = 'create';
+			$page = new Role;
+		}
+
+		$form = RolePresenter::form($page);
+
+		$data = array(
+			'eloquent' => $page,
+			'form'     => $form,
+		);
+
+		View::share('_title_', __("authorize::title.roles.{$type}"));
+
+		return View::make('authorize::roles.edit', $data);
 	}
 
 	/**

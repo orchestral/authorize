@@ -1,6 +1,7 @@
 <?php namespace Authorize\Presenter;
 
 use \Config,
+	Orchestra\Form,
 	Orchestra\HTML,
 	Orchestra\Table;
 
@@ -54,6 +55,34 @@ class Role {
 
 					return HTML::create('div', HTML::raw(implode('', $html)), array('class' => 'btn-group'));
 				};
+			});
+		});
+	}
+
+	/**
+	 * View form generator for Orchestra\Model\Role
+	 * 
+	 * @static
+	 * @access public
+	 * @param  Orchestra\Model\Role $model
+	 * @return Orchestra\Form
+	 */
+	public static function form($model)
+	{
+		return Form::of('authorize.roles', function ($form) use ($model)
+		{
+			$form->row($model);
+			$form->attr(array(
+				'action' => handles('orchestra::resources/authorize.roles/view/'.$model->id),
+				'method' => 'POST',
+			));
+
+			$form->fieldset(function ($fieldset)
+			{
+				$fieldset->control('input:text', 'name', function ($control)
+				{
+					$control->label = __('authorize::label.name');
+				});
 			});
 		});
 	}

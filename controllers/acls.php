@@ -1,5 +1,7 @@
 <?php
 
+use Orchestra\View;
+
 class Authorize_Acls_Controller extends Authorize\Controller {
 	
 	/**
