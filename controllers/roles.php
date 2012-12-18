@@ -54,6 +54,10 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 			{
 				$role->delete();
 			});
+
+			$msg->add('success', __('authorize::response.roles.delete', array(
+				'name' => $role->title,
+			)));
 		}
 		catch (Exception $e)
 		{
