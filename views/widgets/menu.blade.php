@@ -15,9 +15,6 @@
 				<li class="{{ URI::is('*/resources/authorize.roles*') ? 'active' : '' }}">
 					{{ HTML::link(handles('orchestra::resources/authorize.roles'), 'Roles') }}
 				</li>
-				<li class="{{ URI::is('*/resources/authorize.acls*') ? 'active' : '' }}">
-					{{ HTML::link(handles('orchestra::resources/authorize.acls'), 'ACL') }}
-				</li>
 				@endif
 			</ul>
 		</div>
