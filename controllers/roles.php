@@ -73,6 +73,57 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 	}
 
 	/**
+	 * Update a role
+	 *
+	 * POST (orchestra)/resources/authorize.roles/view/(:id)
+	 *
+	 * @access public
+	 * @param  int      $id
+	 * @return Response
+	 */
+	public function post_view($id = null)
+	{
+		$input   = Input::all();
+		$role_id = $id ?: "0";
+
+		$rules = array(
+			'name' => array(
+				'required',
+				"unique:roles,name,{$role_id}",
+			),
+		);
+
+		$msg = new Messages;
+		$val = Validator::make($input, $rules);
+
+		if ($val->fails())
+		{
+			return Redirect::to(handles("orchestra::resources/authorize.roles/view/{$id}"))
+					->with_input()
+					->with_errors($val);
+		}
+
+		$type = 'update';
+		$role = Role::find($id);
+
+		if (is_null($role))
+		{
+			$type = 'create';
+			$role = new Role;
+		}
+
+		$role->name = $input['name'];
+		$role->save();
+
+		$msg->add('success', __("authorize::response.roles.{$type}", array(
+			'name' => $role->name,
+		)));
+
+		return Redirect::to(handles('orchestra::resources/authorize.roles'))
+			->with('message', $msg->serialize());
+	}
+
+	/**
 	 * Delete a role
 	 *
 	 * @access public
