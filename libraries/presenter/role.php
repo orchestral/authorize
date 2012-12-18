@@ -1,6 +1,7 @@
 <?php namespace Authorize\Presenter;
 
-use Orchestra\HTML,
+use \Config,
+	Orchestra\HTML,
 	Orchestra\Table;
 
 class Role {
@@ -39,13 +40,17 @@ class Role {
 							handles('orchestra::resources/authorize.roles/view/'.$row->id),
 							__('orchestra::label.edit'),
 							array('class' => 'btn btn-mini btn-warning')
-						),
-						HTML::link(
+						)
+					);
+
+					if ((int) $row->id !== Config::get('authorize::authorize.default_role'))
+					{
+						$html[] = HTML::link(
 							handles('orchestra::resources/authorize.roles/delete/'.$row->id),
 							__('orchestra::label.delete'),
 							array('class' => 'btn btn-mini btn-danger')
-						),
-					);
+						);
+					}
 
 					return HTML::create('div', HTML::raw(implode('', $html)), array('class' => 'btn-group'));
 				};
