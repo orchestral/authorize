@@ -37,7 +37,7 @@ class RoutingHomeTest extends Authorize\Testable\TestCase {
 	 *
 	 * @test
 	 */
-	public function testGetLandingPage()
+	public function testGetLandingPageSuccessful()
 	{
 		$this->be($this->user);
 
@@ -50,5 +50,23 @@ class RoutingHomeTest extends Authorize\Testable\TestCase {
 
 		$this->assertInstanceOf('Laravel\Response', $content);
 		$this->assertEquals('authorize::home', $content->content->view);
+	}
+
+	/**
+	 * Test Request GET (orchestra)/resources/authorize failed without auth.
+	 *
+	 * @test
+	 */
+	public function testGetLandingPageFailedWithoutAuth()
+	{
+		$this->be(null);
+
+		$response = $this->call('orchestra::resources@authorize');
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::login'), 
+			$response->foundation->headers->get('location'));
+
 	}
 }
