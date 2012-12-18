@@ -2,7 +2,7 @@
 
 use \Controller as Base_Controller;
 
-class Controller extends Base_Controller {
+abstract class Controller extends Base_Controller {
 	
 	/**
 	 * Use restful verb.

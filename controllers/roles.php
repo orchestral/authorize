@@ -10,6 +10,15 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 	 */
 	public function get_index()
 	{
-		return View::make('authorize::home');
+		$roles = Orchestra\Model\Role::paginate(30);
+		$table = Authorize\Presenter\Role::table($roles);
+		$data  = array(
+			'eloquent' => $roles,
+			'table'    => $table,
+		);
+
+		View::share('_title_', __('authorize::title.roles.list'));
+
+		return View::make('authorize::roles.index', $data);
 	}
 }
