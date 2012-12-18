@@ -37,7 +37,7 @@ class Role {
 					// @todo need to use language string for this.
 					$html = array(
 						HTML::link(
-							handles('orchestra::resources/authorize.roles/view/'.$row->id),
+							handles("orchestra::resources/authorize.roles/view/{$row->id}"),
 							__('orchestra::label.edit'),
 							array('class' => 'btn btn-mini btn-warning')
 						)
@@ -46,7 +46,7 @@ class Role {
 					if ((int) $row->id !== (int) Config::get('authorize::authorize.default_role'))
 					{
 						$html[] = HTML::link(
-							handles('orchestra::resources/authorize.roles/delete/'.$row->id),
+							handles("orchestra::resources/authorize.roles/delete/{$row->id}"),
 							__('orchestra::label.delete'),
 							array('class' => 'btn btn-mini btn-danger')
 						);
