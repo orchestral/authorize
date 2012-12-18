@@ -7,6 +7,19 @@ use Authorize\Presenter\Role as RolePresenter,
 class Authorize_Roles_Controller extends Authorize\Controller {
 
 	/**
+	 * Append filter on each construct
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->filter('before', 'authorize::manage-roles');
+	}
+
+	/**
 	 * Get default resources landing page.
 	 *
 	 * @access public

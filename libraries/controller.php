@@ -10,17 +10,4 @@ abstract class Controller extends Base_Controller {
 	 * @var boolean
 	 */
 	public $restful = true;
-
-	/**
-	 * Append filter on each construct
-	 *
-	 * @access public
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->filter('before', 'orchestra::manage');
-	}
 }
