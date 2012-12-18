@@ -1,7 +1,7 @@
 <?php
 
-class Authorize_Home_Controller extends Authorize\Controller {
-
+class Authorize_Acls_Controller extends Authorize\Controller {
+	
 	/**
 	 * Get default resources landing page.
 	 *

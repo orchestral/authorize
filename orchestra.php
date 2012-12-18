@@ -15,6 +15,9 @@ Event::listen('orchestra.started: backend', function ()
 		'name' => 'Authorize',
 		'uses' => 'authorize::home',
 	));
+
+	$authorize->roles = 'authorize::roles';
+	$authorize->acls  = 'authorize::acls';
 });
 
 Orchestra\Extension\Config::map('authorize', array(
