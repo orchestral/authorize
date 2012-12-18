@@ -44,7 +44,7 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 					->with('message', $msg->serialize());
 		}
 
-		$role = Orchestra\Model\Role::find($id);
+		$role = Role::find($id);
 
 		if (is_null($role)) $m->add('error', __('orchestra::response.db-404'));
 
