@@ -21,4 +21,16 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 
 		return View::make('authorize::roles.index', $data);
 	}
+
+	/**
+	 * Delete a role
+	 *
+	 * @access public
+	 * @param  int      $id
+	 * @return Response
+	 */
+	public function get_delete($id)
+	{
+		
+	}
 }
