@@ -9,5 +9,6 @@
 */
 
 Autoloader::namespaces(array(
-	'Authorize' => Bundle::path('authorize').'libraries'.DS,
+	'Authorize\Presenter' => Bundle::path('authorize').'presenters'.DS
+	'Authorize'           => Bundle::path('authorize').'libraries'.DS,
 ));
