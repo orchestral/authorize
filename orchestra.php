@@ -32,7 +32,7 @@ Event::listen('orchestra.started: backend', function ()
 */
 
 Orchestra\Extension\Config::map('authorize', array(
-	'default_role' => 'authorize::authorize.default_role',
+	'default_role' => 'orchestra::orchestra.default_role',
 ));
 
 
