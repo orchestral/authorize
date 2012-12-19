@@ -5,6 +5,19 @@ Acl & Role Manager for Orchestra Platform.
 
 [![Build Status](https://secure.travis-ci.org/orchestral/authorize.png?branch=master)](http://travis-ci.org/orchestral/authorize)
 
+## Installation
+
+### Installation with Laravel Artisan
+
+Authorize can be downloaded directly from Artisan using the following commands:
+
+	php artisan bundle:install authorize
+
+## Setup
+
+To start using Authorize, activate the extension from Orchestra Administrator
+Interface.
+
 ## Contributors
 
 * [Mior Muhammad Zaki](http://git.io/crynobone)
