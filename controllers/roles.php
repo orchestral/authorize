@@ -134,7 +134,7 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 	{
 		$msg  = new Messages;
 
-		if ((int) $id === (int) Config::get('authorize::authorize.default_role'))
+		if ((int) $id === (int) Config::get('orchestra::orchestra.default_role'))
 		{
 			$msg->add('error', __('authorize::response.roles.delete-default-failed'));
 			return Redirect::to(handles('orchestra::resources/authorize.roles'))

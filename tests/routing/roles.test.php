@@ -71,6 +71,44 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	}
 
 	/**
+	 * Test Request GET (orchestra)/resources/authorize.roles/view is successful.
+	 *
+	 * @test
+	 */
+	public function testGetNewRoleIsSuccessful()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view'));
+
+		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertEquals(200, $response->foundation->getStatusCode());
+
+		$content = $response->content->data['content'];
+
+		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertEquals('authorize::roles.edit', $content->content->view);
+	}
+
+	/**
+	 * Test Request GET (orchestra)/resources/authorize.roles/view failed without
+	 * auth.
+	 *
+	 * @test
+	 */
+	public function testGetNewRoleFailedWithoutAuth()
+	{
+		$this->be(null);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view'));
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::login'),
+			$response->foundation->headers->get('location'));
+	}
+
+	/**
 	 * Test Request GET (orchestra)/resources/authorize.roles/delete is 
 	 * successful.
 	 *
@@ -105,18 +143,22 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	 */
 	public function testGetDeleteFailedIfDeletingDefaultRole()
 	{
-		$acl = Orchestra::acl();
+		$default_role = Config::get('orchestra::orchestra.default_role');
+		$acl          = Orchestra::acl();
+
+		$this->assertNotNull($default_role);
+
 		$this->be($this->user);
 
 		$response = $this->call('orchestra::resources@authorize.roles', array(
 			'delete', 
-			Config::get('authorize::authorize.default_role'),
+			$default_role,
 		));
 
 		$this->assertInstanceOf('Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 
-		$role = Orchestra\Model\Role::find(Config::get('authorize::authorize.default_role'));
+		$role = Orchestra\Model\Role::find($default_role);
 
 		$this->assertFalse(is_null($role));
 		$this->assertTrue($acl->has_role($role->name));

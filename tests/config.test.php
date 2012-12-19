@@ -14,7 +14,7 @@ class ConfigTest extends Authorize\Testable\TestCase {
 	{
 		$memory = Orchestra::memory();
 
-		$this->assertEquals(Config::get('authorize::authorize.default_role'), 
+		$this->assertEquals(Config::get('orchestra::orchestra.default_role'), 
 			$memory->get('extension_authorize.default_role'));
 	}
 }
