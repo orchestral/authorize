@@ -11,6 +11,11 @@ class Authorize_Seed_Acl {
 	public function __construct()
 	{
 		Bundle::start('orchestra');
+
+		if (false === Orchestra\Installer::installed())
+		{
+			throw new RuntimeException("Orchestra need to be install first.");
+		}
 	}
 
 	/**
@@ -20,6 +25,9 @@ class Authorize_Seed_Acl {
 	 */
 	public function up()
 	{
+		$role    = Orchestra\Model\Role::find(
+			Config::get('orchestra::orchestra.default_role', 1)
+		);
 		$acl     = Orchestra::acl();
 		$actions = array(
 			'Manage Roles',
@@ -27,7 +35,7 @@ class Authorize_Seed_Acl {
 		);
 
 		$acl->add_actions($actions);
-		$acl->allow('Administrator', $actions);
+		$acl->allow($role->name, $actions);
 	}
 
 	/**
