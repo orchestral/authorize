@@ -71,7 +71,8 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	}
 
 	/**
-	 * Test Request GET (orchestra)/resources/authorize.roles/view is successful.
+	 * Test Request GET (orchestra)/resources/authorize.roles/view is 
+	 * successful.
 	 *
 	 * @test
 	 */
@@ -91,8 +92,8 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	}
 
 	/**
-	 * Test Request GET (orchestra)/resources/authorize.roles/view failed without
-	 * auth.
+	 * Test Request GET (orchestra)/resources/authorize.roles/view failed 
+	 * without auth.
 	 *
 	 * @test
 	 */
@@ -101,6 +102,133 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 		$this->be(null);
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view'));
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::login'),
+			$response->foundation->headers->get('location'));
+	}
+
+	/**
+	 * Test Request POST (orchestra)/resources/authorize.roles/view is 
+	 * successful.
+	 *
+	 * @test
+	 */
+	public function testPostNewRoleIsSuccessful()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view'), 'POST', array(
+			'name' => 'Foobar',
+		));
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::resources/authorize.roles'),
+			$response->foundation->headers->get('location'));
+
+		$role = Orchestra\Model\Role::where('name', '=', 'Foobar')->first();
+
+		$this->assertFalse(is_null($role));
+	}
+
+	/**
+	 * Test Request POST (orchestra)/resources/authorize.roles/view failed 
+	 * validation.
+	 *
+	 * @test
+	 */
+	public function testPostNewRoleFailedValidation()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view'), 'POST', array());
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::resources/authorize.roles/view/'),
+			$response->foundation->headers->get('location'));
+	}
+
+	/**
+	 * Test Request GET (orchestra)/resources/authorize.roles/view/(id) is 
+	 * successful.
+	 *
+	 * @test
+	 */
+	public function testGetEditRoleIsSuccessful()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2));
+
+		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertEquals(200, $response->foundation->getStatusCode());
+
+		$content = $response->content->data['content'];
+
+		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertEquals('authorize::roles.edit', $content->content->view);
+	}
+
+	/**
+	 * Test Request POST (orchestra)/resources/authorize.roles/view is 
+	 * successful.
+	 *
+	 * @test
+	 */
+	public function testPostEditRoleIsSuccessful()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view', 1), 'POST', array(
+			'name' => 'Adminz',
+		));
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::resources/authorize.roles'),
+			$response->foundation->headers->get('location'));
+
+		$role = Orchestra\Model\Role::find(1);
+
+		$this->assertEquals('Adminz', $role->name);
+	}
+
+	/**
+	 * Test Request POST (orchestra)/resources/authorize.roles/view failed 
+	 * validation.
+	 *
+	 * @test
+	 */
+	public function testPostEditRoleFailedValidation()
+	{
+		$this->be($this->user);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2), 'POST', array());
+
+		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertEquals(302, $response->foundation->getStatusCode());
+		$this->assertEquals(handles('orchestra::resources/authorize.roles/view/2'),
+			$response->foundation->headers->get('location'));
+
+		$role = Orchestra\Model\Role::find(2);
+
+		$this->assertEquals('Member', $role->name);
+	}
+
+	/**
+	 * Test Request GET (orchestra)/resources/authorize.roles/view(id) 
+	 * failed without auth.
+	 *
+	 * @test
+	 */
+	public function testGetEditRoleFailedWithoutAuth()
+	{
+		$this->be(null);
+
+		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2));
 
 		$this->assertInstanceOf('Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
