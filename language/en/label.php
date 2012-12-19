@@ -1,5 +1,6 @@
 <?php
 
 return array(
-	'name' => 'Name',
+	'name'       => 'Name',
+	'sync-roles' => 'Sync Roles',
 );
