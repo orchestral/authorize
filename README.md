@@ -1,7 +1,7 @@
 Authorize for Orchestra Platform
 =========
 
-Acl & Role Manager for Orchestra Platform.
+Acl and Role (RBAC) Management System for Orchestra Platform, allow you to define and custom ACL and Roles.
 
 [![Build Status](https://secure.travis-ci.org/orchestral/authorize.png?branch=master)](http://travis-ci.org/orchestral/authorize)
 
