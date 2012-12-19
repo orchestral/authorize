@@ -53,13 +53,6 @@ Event::listen('orchestra.form: extension.authorize', function ($config, $form)
 
 Event::listen("orchestra.saved: extension.authorize", function($config) 
 {
-	$role = Orchestra\Model\Role::find($config->default_role);
-	$acl  = Orchestra\Core::acl();
-	
-	$acl->allow($role->name, array(
-		'Manage Users', 
-		'Manage Orchestra',
-		'Manage Roles',
-		'Manage Acl',
-	));
+	Config::set('orchestra::orchestra.default_role', (int) $config->default_role);
+	Authorize\Core::sync();
 });

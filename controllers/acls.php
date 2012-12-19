@@ -61,17 +61,34 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 	 */
 	public function post_index()
 	{
-		$acls    = Acl::all();
-		$active   = null;
-
-		foreach ($acls as $name => $instance)
+		$msg       = new Messages;
+		$metric    = Input::get('metric');
+		$instances = Acl::all();
+		         
+		if (is_null($metric) or ! isset($instances[$metric]))
 		{
-			$lists[$name] = Str::title($name);
-
-			if ($name === $selected) $active = $instance;
+			return Response::error('404');
 		}
 
-		if (is_null($active)) return Response::error('404');
+		$acl = $instances[$metric];
+
+		foreach ($acl->roles()->get() as $role_key => $role_name)
+		{
+			foreach($acl->actions()->get() as $action_key => $action_name)
+			{
+				$input = ('yes' === Input::get("acl-{$role_key}-{$action_key}", 'no'));
+
+				$acl->allow($role_name, $action_name, $input);
+			}
+		}
+
+		Authorize\Core::sync();
+
+		$msg->add('success', __('authorize::response.acls.update'));
+
+		return Redirect::to(handles("orchestra::resources/authorize.acls?name={$metric}"))
+				->with('message', $msg->serialize());
+
 	}
 
 	/**
