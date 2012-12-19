@@ -1,7 +1,7 @@
 Authorize for Orchestra Platform
 =========
 
-Acl and Role (RBAC) Management System for Orchestra Platform, allow you to define and custom ACL and Roles.
+Acl and Role (RBAC) Management System for Orchestra Platform, allow you to define and customize ACL and Roles.
 
 [![Build Status](https://secure.travis-ci.org/orchestral/authorize.png?branch=master)](http://travis-ci.org/orchestral/authorize)
 
@@ -15,8 +15,7 @@ Authorize can be downloaded directly from Artisan using the following commands:
 
 ## Setup
 
-To start using Authorize, activate the extension from Orchestra Administrator
-Interface.
+To start using Authorize, activate the extension from Orchestra Administrator Interface.
 
 ## Contributors
 
