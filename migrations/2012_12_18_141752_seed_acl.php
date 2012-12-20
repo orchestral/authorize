@@ -25,9 +25,7 @@ class Authorize_Seed_Acl {
 	 */
 	public function up()
 	{
-		$role    = Orchestra\Model\Role::find(
-			Config::get('orchestra::orchestra.default_role', 1)
-		);
+		$role    = Orchestra\Model\Role::admin();
 		$acl     = Orchestra::acl();
 		$actions = array(
 			'Manage Roles',

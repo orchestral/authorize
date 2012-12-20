@@ -15,7 +15,7 @@ class Core {
 	 */
 	public static function sync()
 	{
-		$role = Role::find(Config::get('orchestra::orchestra.default_role'));
+		$role = Role::admin();
 		$acl  = O::acl();
 		
 		$acl->allow($role->name, array(
