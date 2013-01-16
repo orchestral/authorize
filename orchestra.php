@@ -12,8 +12,19 @@
 Event::listen('orchestra.started: backend', function ()
 {
 	$authorize = Orchestra\Resources::make('authorize', array(
-		'name' => 'Authorize',
-		'uses' => 'authorize::home',
+		'name'    => 'Authorize',
+		'uses'    => 'authorize::home',
+		'visible' => function ()
+		{
+			$acl = Orchestra::acl();
+
+			if ($acl->can('manage acl') or $acl->can('manage roles'))
+			{
+				return true;
+			}
+
+			return false;
+		}
 	));
 
 	$authorize->roles = 'authorize::roles';

@@ -13,8 +13,6 @@ class Authorize_Home_Controller extends Authorize\Controller {
 	public function __construct()
 	{
 		parent::__construct();
-
-		$this->filter('before', 'orchestra::manage');
 	}
 	
 	/**
