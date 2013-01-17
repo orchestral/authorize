@@ -49,7 +49,7 @@ class RoutingAclsTest extends Authorize\Testable\TestCase {
 		$content = $response->content->data['content'];
 
 		$this->assertInstanceOf('Laravel\Response', $content);
-		$this->assertEquals('authorize::home', $content->content->view);
+		$this->assertEquals('authorize::acls.index', $content->content->view);
 	}
 
 	/**
