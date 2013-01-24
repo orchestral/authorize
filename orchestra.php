@@ -47,7 +47,6 @@ Orchestra\Extension\Config::map('authorize', array(
 	'member_role'  => 'orchestra::orchestra.member_role',
 ));
 
-
 Event::listen('orchestra.form: extension.authorize', function ($config, $form)
 {
 	$form->extend(function ($form) use ($config)
