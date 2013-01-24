@@ -44,7 +44,12 @@ class Role {
 						)
 					);
 
-					if ((int) $row->id !== (int) Config::get('orchestra::orchestra.default_role'))
+					$roles = array(
+						(int) Config::get('orchestra::orchestra.default_role'),
+						(int) Config::get('orchestra::orchestra.member_role'),
+					);
+
+					if ( ! in_array((int) $row->id, $roles))
 					{
 						$html[] = HTML::link(
 							handles("orchestra::resources/authorize.roles/delete/{$row->id}"),
