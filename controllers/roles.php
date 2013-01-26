@@ -52,18 +52,18 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 	public function get_view($id = null)
 	{
 		$type = 'update';
-		$page = Role::find($id);
+		$role = Role::find($id);
 
-		if (is_null($page))
+		if (is_null($role))
 		{
 			$type = 'create';
-			$page = new Role;
+			$role = new Role;
 		}
 
-		$form = RolePresenter::form($page);
+		$form = RolePresenter::form($role);
 
 		$data = array(
-			'eloquent' => $page,
+			'eloquent' => $role,
 			'form'     => $form,
 		);
 
