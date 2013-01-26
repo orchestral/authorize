@@ -3,7 +3,7 @@
 	"description" : "Acl & Role Manager for Orchestra Platform",
 	"author"      : "Mior Muhammad Zaki",
 	"url"         : "https://github.com/orchestral/authorize",
-	"version"     : "0.1.2",
+	"version"     : "1.0.0",
 	"config"      : {},
 	"require"     : {}
 }
