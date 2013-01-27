@@ -18,10 +18,7 @@ Event::listen('orchestra.started: backend', function ()
 		{
 			$acl = Orchestra::acl();
 
-			if ($acl->can('manage acl') or $acl->can('manage roles'))
-			{
-				return true;
-			}
+			if ($acl->can('manage acl') or $acl->can('manage roles')) return true;
 
 			return false;
 		}
