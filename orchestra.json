@@ -1,6 +1,6 @@
 {
 	"name"        : "Authorize",
-	"description" : "Acl & Role Manager for Orchestra Platform",
+	"description" : "Role Based Access Control (RBAC) Manager for Orchestra Platform",
 	"author"      : "Mior Muhammad Zaki",
 	"url"         : "https://github.com/orchestral/authorize",
 	"version"     : "1.0.0",
