@@ -28,7 +28,6 @@ Event::listen('orchestra.started: backend', function ()
 	$authorize->acls  = 'authorize::acls';
 });
 
-
 /*
 |--------------------------------------------------------------------------
 | Hook Authorize Configuration
@@ -46,22 +45,7 @@ Orchestra\Extension\Config::map('authorize', array(
 
 Event::listen('orchestra.form: extension.authorize', function ($config, $form)
 {
-	$form->extend(function ($form) use ($config)
-	{
-		$form->fieldset(__('authorize::label.roles.configuration'), function ($fieldset) use ($config)
-		{
-			$fieldset->control('select', 'default_role', function($control) use ($config)
-			{
-				$control->label   = __('authorize::label.roles.default');
-				$control->options = Orchestra\Model\Role::lists('name', 'id');
-			});
-			$fieldset->control('select', 'member_role', function($control) use ($config)
-			{
-				$control->label   = __('authorize::label.roles.member');
-				$control->options = Orchestra\Model\Role::lists('name', 'id');
-			});
-		});
-	});
+	Authorize\Presenter\Extension::form($form);
 });
 
 Event::listen("orchestra.saved: extension.authorize", function($config) 
