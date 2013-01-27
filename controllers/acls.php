@@ -2,6 +2,7 @@
 
 use Authorize\Str,
 	Orchestra\Acl,
+	Orchestra\Extension,
 	Orchestra\Model\Role,
 	Orchestra\Messages, 
 	Orchestra\View;
@@ -33,10 +34,13 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 		$selected = Input::get('name', 'orchestra');
 		$acls     = Acl::all();
 		$active   = null;
+		$memory   = Orchestra::memory();
 
 		foreach ($acls as $name => $instance)
 		{
-			$lists[$name] = Str::title($name);
+			$extension    = $memory->get("extensions.available.{$name}.name", null);
+			
+			$lists[$name] = (is_null($extension) ? Str::title($name) : $extension);
 
 			if ($name === $selected) $active = $instance;
 		}
