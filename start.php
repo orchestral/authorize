@@ -6,6 +6,7 @@
 |--------------------------------------------------------------------------
 |
 | Map Authorize Library using PSR-0 standard namespace.
+|
 */
 
 Autoloader::namespaces(array(
