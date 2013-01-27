@@ -11,7 +11,7 @@ class Extension {
 	 * @static
 	 * @access public 			
 	 * @param  Orchestra\Form   $form
-	 * @return void
+	 * @return Orchestra\Form
 	 */
 	public static function form(Form $form)
 	{
@@ -31,5 +31,7 @@ class Extension {
 				});
 			});
 		});
+
+		return $form;
 	}
 }
