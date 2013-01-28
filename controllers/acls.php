@@ -10,7 +10,7 @@ use Authorize\Str,
 class Authorize_Acls_Controller extends Authorize\Controller {
 	
 	/**
-	 * Append filter on each construct
+	 * Append filter on each construct.
 	 *
 	 * @access public
 	 * @return void

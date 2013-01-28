@@ -30,7 +30,7 @@ Event::listen('orchestra.started: backend', function ()
 
 /*
 |--------------------------------------------------------------------------
-| Hook Authorize Configuration
+| Map Authorize Configuration
 |--------------------------------------------------------------------------
 |
 | Allow Orchestra Extension Configuration page to configure Authorize 
