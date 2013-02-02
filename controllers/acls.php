@@ -48,11 +48,12 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 		if (is_null($active)) return Response::error('404');
 
 		$data     = array(
-			'_title_'  => __('authorize::title.acls.list'),
 			'eloquent' => $active,
 			'lists'    => $lists,
 			'selected' => $selected,
 		);
+
+		View::share('_title_', __('authorize::title.acls.list'));
 
 		return View::make('authorize::acls.index', $data);
 	}
@@ -118,6 +119,7 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 		}
 
 		$current->add_roles($roles);
+		
 		$msg->add('success', __('authorize::response.acls.sync-roles', array(
 			'name' => Str::humanize($name),
 		)));
