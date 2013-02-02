@@ -15,7 +15,7 @@ Authorize can be downloaded directly from Artisan using the following commands:
 
 ## Setup
 
-To start using Authorize, activate the extension from Orchestra Administrator Interface.
+To start using Authorize, activate the extension from Orchestra Platform Administrator Interface.
 
 ## Contributors
 
