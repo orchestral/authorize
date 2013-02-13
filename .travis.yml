@@ -15,4 +15,4 @@ before_install:
   - php artisan bundle:install orchestra
   - echo "<?php return array('orchestra' => array('auto' => true, 'handles' => 'orchestra'), 'authorize');" > ./application/bundles.php
 
-script: "php artisan test authorize"
+script: "phpunit --coverage-text --configuration bundles/authorize/phpunit.xml"
