@@ -1,8 +1,8 @@
-<?php
+<?php namespace Authorize\Tests;
 
-Bundle::start('authorize');
+\Bundle::start('authorize');
 
-class ControllerTest extends PHPUnit_Framework_TestCase {
+class ControllerTest extends \PHPUnit_Framework_TestCase {
 	
 	/**
 	 * Test Controller is using restful verb.
@@ -20,4 +20,4 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 	}
 }
 
-class ControllerStub extends Authorize\Controller {}
+class ControllerStub extends \Authorize\Controller {}

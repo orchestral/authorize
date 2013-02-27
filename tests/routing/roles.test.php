@@ -1,9 +1,9 @@
-<?php
+<?php namespace Authorize\Tests\Routing;
 
-Bundle::start('orchestra');
-Bundle::start('authorize');
+\Bundle::start('orchestra');
+\Bundle::start('authorize');
 
-class RoutingRolesTest extends Authorize\Testable\TestCase {
+class RoutingRolesTest extends \Authorize\Testable\TestCase {
 	
 	/**
 	 * User instance.
@@ -19,7 +19,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	{
 		parent::setUp();
 
-		$this->user = Orchestra\Model\User::find(1);
+		$this->user = \Orchestra\Model\User::find(1);
 	}
 
 	/**
@@ -43,12 +43,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles');
 
-		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertInstanceOf('\Laravel\Response', $response);
 		$this->assertEquals(200, $response->foundation->getStatusCode());
 
 		$content = $response->content->data['content'];
 
-		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertInstanceOf('\Laravel\Response', $content);
 		$this->assertEquals('authorize::roles.index', $content->content->view);
 	}
 
@@ -64,7 +64,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles');
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::login'),
 			$response->foundation->headers->get('location'));
@@ -82,12 +82,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view'));
 
-		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertInstanceOf('\Laravel\Response', $response);
 		$this->assertEquals(200, $response->foundation->getStatusCode());
 
 		$content = $response->content->data['content'];
 
-		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertInstanceOf('\Laravel\Response', $content);
 		$this->assertEquals('authorize::roles.edit', $content->content->view);
 	}
 
@@ -103,7 +103,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view'));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::login'),
 			$response->foundation->headers->get('location'));
@@ -123,12 +123,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 			'name' => 'Foobar',
 		));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::resources/authorize.roles'),
 			$response->foundation->headers->get('location'));
 
-		$role = Orchestra\Model\Role::where('name', '=', 'Foobar')->first();
+		$role = \Orchestra\Model\Role::where('name', '=', 'Foobar')->first();
 
 		$this->assertFalse(is_null($role));
 	}
@@ -145,7 +145,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view'), 'POST', array());
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::resources/authorize.roles/view/'),
 			$response->foundation->headers->get('location'));
@@ -163,12 +163,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2));
 
-		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertInstanceOf('\Laravel\Response', $response);
 		$this->assertEquals(200, $response->foundation->getStatusCode());
 
 		$content = $response->content->data['content'];
 
-		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertInstanceOf('\Laravel\Response', $content);
 		$this->assertEquals('authorize::roles.edit', $content->content->view);
 	}
 
@@ -186,12 +186,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 			'name' => 'Adminz',
 		));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::resources/authorize.roles'),
 			$response->foundation->headers->get('location'));
 
-		$role = Orchestra\Model\Role::find(1);
+		$role = \Orchestra\Model\Role::find(1);
 
 		$this->assertEquals('Adminz', $role->name);
 	}
@@ -208,12 +208,12 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2), 'POST', array());
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::resources/authorize.roles/view/2'),
 			$response->foundation->headers->get('location'));
 
-		$role = Orchestra\Model\Role::find(2);
+		$role = \Orchestra\Model\Role::find(2);
 
 		$this->assertEquals('Member', $role->name);
 	}
@@ -230,7 +230,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('view', 2));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::login'),
 			$response->foundation->headers->get('location'));
@@ -244,8 +244,8 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	 */
 	public function testGetDeleteIsSuccessful()
 	{
-		$editor = Orchestra\Model\Role::create(array('name' => 'Editor'));
-		$acl    = Orchestra::acl();
+		$editor = \Orchestra\Model\Role::create(array('name' => 'Editor'));
+		$acl    = \Orchestra::acl();
 
 		$this->assertTrue($acl->has_role('editor'));
 
@@ -256,10 +256,10 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 			$editor->id,
 		));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 
-		$this->assertTrue(is_null(Orchestra\Model\Role::find($editor->id)));
+		$this->assertTrue(is_null(\Orchestra\Model\Role::find($editor->id)));
 		$this->assertFalse($acl->has_role('editor'));
 	}
 
@@ -271,8 +271,8 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 	 */
 	public function testGetDeleteFailedIfDeletingDefaultRole()
 	{
-		$default_role = Config::get('orchestra::orchestra.default_role');
-		$acl          = Orchestra::acl();
+		$default_role = \Config::get('orchestra::orchestra.default_role');
+		$acl          = \Orchestra::acl();
 
 		$this->assertNotNull($default_role);
 
@@ -283,10 +283,10 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 			$default_role,
 		));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 
-		$role = Orchestra\Model\Role::find($default_role);
+		$role = \Orchestra\Model\Role::find($default_role);
 
 		$this->assertFalse(is_null($role));
 		$this->assertTrue($acl->has_role($role->name));
@@ -304,7 +304,7 @@ class RoutingRolesTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.roles', array('delete', 1));
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::login'),
 			$response->foundation->headers->get('location'));

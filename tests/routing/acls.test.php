@@ -1,9 +1,9 @@
-<?php
+<?php namespace Authorize\Tests\Routing;
 
-Bundle::start('orchestra');
-Bundle::start('authorize');
+\Bundle::start('orchestra');
+\Bundle::start('authorize');
 
-class RoutingAclsTest extends Authorize\Testable\TestCase {
+class RoutingAclsTest extends \Authorize\Testable\TestCase {
 	
 	/**
 	 * User instance.
@@ -19,7 +19,7 @@ class RoutingAclsTest extends Authorize\Testable\TestCase {
 	{
 		parent::setUp();
 
-		$this->user = Orchestra\Model\User::find(1);
+		$this->user = \Orchestra\Model\User::find(1);
 	}
 
 	/**
@@ -43,12 +43,12 @@ class RoutingAclsTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.acls');
 
-		$this->assertInstanceOf('Laravel\Response', $response);
+		$this->assertInstanceOf('\Laravel\Response', $response);
 		$this->assertEquals(200, $response->foundation->getStatusCode());
 
 		$content = $response->content->data['content'];
 
-		$this->assertInstanceOf('Laravel\Response', $content);
+		$this->assertInstanceOf('\Laravel\Response', $content);
 		$this->assertEquals('authorize::acls.index', $content->content->view);
 	}
 
@@ -63,7 +63,7 @@ class RoutingAclsTest extends Authorize\Testable\TestCase {
 
 		$response = $this->call('orchestra::resources@authorize.acls');
 
-		$this->assertInstanceOf('Laravel\Redirect', $response);
+		$this->assertInstanceOf('\Laravel\Redirect', $response);
 		$this->assertEquals(302, $response->foundation->getStatusCode());
 		$this->assertEquals(handles('orchestra::login'), 
 			$response->foundation->headers->get('location'));

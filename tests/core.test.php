@@ -1,9 +1,9 @@
-<?php
+<?php namespace Authorize\Tests;
 
-Bundle::start('orchestra');
-Bundle::start('authorize');
+\Bundle::start('orchestra');
+\Bundle::start('authorize');
 
-class CoreTest extends Authorize\Testable\TestCase {
+class CoreTest extends \Authorize\Testable\TestCase {
 
 	/**
 	 * Teardown the test environment.
@@ -11,7 +11,8 @@ class CoreTest extends Authorize\Testable\TestCase {
 	public function tearDown()
 	{
 		parent::tearDown();
-		Config::$items = array();
+		
+		\Config::$items = array();
 	}
 	/**
 	 * Test Authorize\Core::sync() is run properly.
@@ -20,15 +21,15 @@ class CoreTest extends Authorize\Testable\TestCase {
 	 */
 	public function testSyncIsSuccessful()
 	{
-		$role = Orchestra\Model\Role::create(array(
+		$role = \Orchestra\Model\Role::create(array(
 			'name' => 'Foo Admin',
 		));
 
-		Config::set('orchestra::orchestra.default_role', (int) $role->id);
+		\Config::set('orchestra::orchestra.default_role', (int) $role->id);
 
-		Authorize\Core::sync();
+		\Authorize\Core::sync();
 
-		$acl = Orchestra::acl();
+		$acl = \Orchestra::acl();
 
 		$this->assertTrue($acl->check($role->name, 'Manage Orchestra'));
 		$this->assertTrue($acl->check($role->name, 'Manage Users'));
