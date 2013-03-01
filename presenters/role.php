@@ -28,10 +28,12 @@ class Role {
 			$table->with($model, true);
 
 			// Add columns
-			$table->column('name');
+			$table->column('name', __('orchestra::label.name'));
 
 			$table->column('action', function ($column)
 			{
+				$column->label('');
+				$column->escape(false);
 				$column->label_attributes(array('class' => 'th-action'));
 				$column->value(function ($row)
 				{
