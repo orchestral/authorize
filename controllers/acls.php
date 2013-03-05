@@ -5,6 +5,7 @@ use Authorize\Str,
 	Orchestra\Extension,
 	Orchestra\Model\Role,
 	Orchestra\Messages, 
+	Orchestra\Site,
 	Orchestra\View;
 
 class Authorize_Acls_Controller extends Authorize\Controller {
@@ -53,7 +54,7 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 			'selected' => $selected,
 		);
 
-		View::share('_title_', __('authorize::title.acls.list'));
+		Site::set('title', __('authorize::title.acls.list'));
 
 		return View::make('authorize::acls.index', $data);
 	}

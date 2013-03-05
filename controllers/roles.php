@@ -2,7 +2,8 @@
 
 use Authorize\Presenter\Role as RolePresenter,
 	Orchestra\Messages,
-	Orchestra\Model\Role,
+	Orchestra\Model\Role, 
+	Orchestra\Site,
 	Orchestra\View;
 
 class Authorize_Roles_Controller extends Authorize\Controller {
@@ -35,7 +36,7 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 			'table'    => $table,
 		);
 
-		View::share('_title_', __('authorize::title.roles.list'));
+		Site::set('title', __('authorize::title.roles.list'));
 
 		return View::make('authorize::roles.index', $data);
 	}
@@ -67,7 +68,7 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 			'form'     => $form,
 		);
 
-		View::share('_title_', __("authorize::title.roles.{$type}"));
+		Site::set('title', __("authorize::title.roles.{$type}"));
 
 		return View::make('authorize::roles.edit', $data);
 	}

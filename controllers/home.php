@@ -1,6 +1,7 @@
 <?php
 
-use Orchestra\View;
+use Orchestra\Site,
+	Orchestra\View;
 
 class Authorize_Home_Controller extends Authorize\Controller {
 
@@ -23,7 +24,7 @@ class Authorize_Home_Controller extends Authorize\Controller {
 	 */
 	public function get_index()
 	{
-		View::share('_title_', 'Authorize');
+		Site::set('title', 'Authorize');
 
 		return View::make('authorize::home');
 	}

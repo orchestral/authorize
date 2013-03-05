@@ -8,11 +8,18 @@
 			<a href="{{ URL::current() }}/view" class="btn btn-primary">Add</a>
 		</div>
 		
-		<h2>{{ isset($_title_) ? $_title_ : 'Authorize' }}
-			@if ( ! empty($_description_))
-			<small>{{ $_description_ ?: '' }}</small>
-			@endif
-		</h2>
+		<?php
+
+		$title       = Orchestra\Site::get('title');
+		$description = Orchestra\Site::get('description'); ?>
+
+		<div class="page-header">
+			<h2>{{ $title ?: 'Authorize' }}
+				@if ( ! empty($description))
+				<small>{{ $description ?: '' }}</small>
+				@endif
+			</h2>
+		</div>
 
 	</div>
 
