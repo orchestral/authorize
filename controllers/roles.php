@@ -94,7 +94,7 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 			),
 		);
 
-		$msg = new Messages;
+		$msg = Messages::make();
 		$val = Validator::make($input, $rules);
 
 		if ($val->fails())
@@ -133,19 +133,23 @@ class Authorize_Roles_Controller extends Authorize\Controller {
 	 */
 	public function get_delete($id)
 	{
-		$msg  = new Messages;
+		$msg = Messages::make();
 
 		if ((int) $id === (int) Config::get('orchestra::orchestra.default_role'))
 		{
 			$msg->add('error', __('authorize::response.roles.delete-default-failed'));
+
 			return Redirect::to(handles('orchestra::resources/authorize.roles'))
 					->with('message', $msg->serialize());
 		}
 
 		$role = Role::find($id);
 
-		if (is_null($role)) $m->add('error', __('orchestra::response.db-404'));
-
+		if (is_null($role)) 
+		{
+			$msg->add('error', __('orchestra::response.db-404'));
+		}
+		
 		try
 		{
 			DB::transaction(function () use ($role)

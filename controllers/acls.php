@@ -40,7 +40,6 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 		foreach ($acls as $name => $instance)
 		{
 			$extension    = $memory->get("extensions.available.{$name}.name", null);
-			
 			$lists[$name] = (is_null($extension) ? Str::title($name) : $extension);
 
 			if ($name === $selected) $active = $instance;
@@ -67,7 +66,7 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 	 */
 	public function post_index()
 	{
-		$msg       = new Messages;
+		$msg       = Messages::make();
 		$metric    = Input::get('metric');
 		$instances = Acl::all();
 		         
@@ -106,7 +105,7 @@ class Authorize_Acls_Controller extends Authorize\Controller {
 	 */
 	public function get_sync($name)
 	{
-		$msg   = new Messages;
+		$msg   = Messages::make();
 		$roles = array();
 		$acls  = Acl::all();
 
